@@ -14,16 +14,9 @@ Ahora, se crea un archivo Dockerfile para contener todos los archivos del proyec
 ![Tarea-10](3.png) 
 
 ## Construcción de Imágenes Docker
-Luego seguimos al paso de construir las imágenes Docker para cada simulación:
-(Coloca aquí las imágenes mostrando el proceso de construcción en la terminal)
 ![Tarea-10](2.png) 
 
-```
-docker build -t bipedo_pybullet:latest ./bipedo
-docker build -t brazo_robotico:latest ./brazo_robotico
-docker build -t carro_pybullet:latest ./carro
-```
-### Ejecución de los Contenedores
+## Ejecución de los Contenedores
 Una vez construidas las imágenes, iniciamos ejecutando cada uno de los ejemplos dentro de sus respectivos contenedores.
 ![Tarea-10](4.png) 
 ### Bípedo:
