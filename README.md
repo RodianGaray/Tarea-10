@@ -28,8 +28,5 @@ Una vez construidas las imágenes, iniciamos ejecutando cada uno de los ejemplos
 ### Carro:
 ![Tarea-10](8.png) 
 
-🧱 Explicación de Funcionamiento
-Cada simulación corre dentro de un contenedor independiente, lo que permite mantener las dependencias y librerías controladas.
-El archivo Dockerfile utiliza una imagen base de Python 3.10 e instala PyBullet automáticamente, asegurando compatibilidad con los tres ejemplos.
 
 
