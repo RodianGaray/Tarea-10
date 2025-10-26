@@ -2,67 +2,59 @@
 
 Este repositorio agrupa tres simulaciones desarrolladas con **PyBullet** (Carro, Brazo y Bípedo), cada una ejecutable en su propio contenedor Docker. Incluye la estructura, el código base y los archivos necesarios para dockerizar y ejecutar las simulaciones.
 
----
-# Proyecto PyBullet — Robots de ejemplo
 
-Repositorio con tres ejemplos en PyBullet: **Bípedo**, **Brazo** y **Carro**.
+## Creación de Archivos Python
+Luego creamos los archivos de Python, en donde pegamos los códigos de cada uno de los ejemplos (Bípedo, Brazo y Carro).
+(Coloca aquí las imágenes de cada script ejecutándose o el código abierto en VSCode)
+image
 
-## Estructura del repositorio
-- /bipedo/
-  - biped2d.urdf
-  - bipedo.py
-- /brazo/
-  - brazo.py
-- /carro/
-  - carro.py
-- Dockerfile
-- run_examples.sh
-- .gitignore
+## Archivo URDF del Bípedo
+Se crea una carpeta especial para el Bípedo, con un archivo URDF, el cual ayuda a definir las propiedades físicas, visuales y cinemáticas del robot.
+Esto permite que PyBullet interprete y modele al robot en un entorno 3D.
+(Coloca aquí la imagen mostrando el modelo URDF del bípedo)
+image
 
-## Requisitos
-- Docker instalado (alternativa: Python 3.9+ y `pip install pybullet numpy`)
+## Creación del Dockerfile
+Ahora, se crea un archivo Dockerfile para contener todos los archivos del proyecto.
+(Coloca aquí la imagen mostrando el contenido del Dockerfile o el editor de texto)
+image
 
-## Construir la imagen Docker
-Desde la raíz del proyecto:
-docker build -t robots_pybullet .
+## Construcción de Imágenes Docker
+Luego seguimos al paso de construir las imágenes Docker para cada simulación:
+(Coloca aquí las imágenes mostrando el proceso de construcción en la terminal)
+image image
 
-## Ejecutar el contenedor e interactuar
-Ejemplo (interactivo, elimina el contenedor al salir):
-docker run -it --rm robots_pybullet
+bash
+Copiar código
+docker build -t bipedo_pybullet:latest ./bipedo
+docker build -t brazo_robotico:latest ./brazo_robotico
+docker build -t carro_pybullet:latest ./carro
+▶️ Ejecución de los Contenedores
+Una vez construidas las imágenes, iniciamos ejecutando cada uno de los ejemplos dentro de sus respectivos contenedores.
 
-Dentro del contenedor puedes ejecutar:
-python3 bipedo/bipedo.py
-python3 brazo/brazo.py
-python3 carro/carro.py
+### Bípedo:
+(Coloca aquí las imágenes del bípedo ejecutándose en el entorno PyBullet)
+image image
 
-O ejecutar los tres ejemplos en modo secuencial (headless):
-./run_examples.sh
+bash
+Copiar código
+docker run -it --rm bipedo_pybullet
+### Brazo Robótico:
+(Coloca aquí la imagen del brazo robótico funcionando en PyBullet)
+image
 
-### Nota sobre visualización (GUI)
-Los scripts por defecto usan `DIRECT` (sin ventana). Si quieres ver la GUI (windowed):
-- En tu host Linux con X11: permite conexiones X (`xhost +local:root`) y ejecuta Docker montando `/tmp/.X11-unix` y pasando `-e DISPLAY`:
-  docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix robots_pybullet
-- Dentro del contenedor, cambia `p.connect(p.DIRECT)` por `p.connect(p.GUI)` en los scripts o ejecuta la misma versión que ya tiene la opción de GUI si la detecta.
+bash
+Copiar código
+docker run -it --rm brazo_robotico
+### Carro:
+(Coloca aquí la imagen del carro desplazándose o su entorno en PyBullet)
+image
 
-## Qué hace cada ejemplo (resumen)
-- **Bípedo**: carga un URDF simple (`biped2d.urdf`), aplica gravedad y avanza la simulación; muestra posición del robot.
-- **Brazo**: crea un brazo simplificado (3 links) programáticamente y aplica una secuencia sencilla de movimientos (articular).
-- **Carro**: crea un cuerpo con "ruedas" (cuerpos enlazados) y aplica una fuerza/velocidad en X; muestra posición.
+bash
+Copiar código
+docker run -it --rm carro_pybullet
+🧱 Explicación de Funcionamiento
+Cada simulación corre dentro de un contenedor independiente, lo que permite mantener las dependencias y librerías controladas.
+El archivo Dockerfile utiliza una imagen base de Python 3.10 e instala PyBullet automáticamente, asegurando compatibilidad con los tres ejemplos.
 
-## Archivos importantes
-- Dockerfile: imagen base y pip install de dependencias.
-- run_examples.sh: ejecuta bipedo, brazo y carro (modo headless).
-- Añade tus imágenes en `images/` y enlázalas en README si deseas.
 
-## Mejoras sugeridas
-- Añadir URDFs más completos y controladores PID.
-- Añadir script `docker-compose` o CI para construir imagen y tests.
-
-## Créditos
-
-Proyecto desarrollado por:
-
-* **Samuel Parra (@samuel12148)**
-* **Miguel Caro (@MiguelCaro06)**
-
-© 2025 GitHub, Inc.
